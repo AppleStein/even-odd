@@ -11,11 +11,19 @@ def odd_even():
         <input name="num"></input>
         </from>"""
     else:
-        return """
-        {}は{}
-        <form action="/" method="POST">
-        <input name="num"></input>
-        </form>""".format(str(request.form["num"]), ["偶数", "奇数"][int(request.form["num"])%2])
+        try:
+            return """
+            {}は{}だ
+            <form action="/" method="POST">
+            <input name="num"></input>
+            </form>""".format(str(request.form["num"]), ["偶数", "奇数"][int(request.form["num"])%2])
+
+        except:
+            return """
+            数字ではない。入力し直したまえ
+            <form action="/" method="POST">
+            <input name="num"></input>
+            </form>"""
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=8888, threaded=True)
